@@ -1,0 +1,14 @@
+/vendor/
+/node_modules/
+/.env
+/.env.*
+!/.env.example
+/composer.lock
+/storage/*.key
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/bootstrap/cache/*.php
+/public/hot
+/.phpunit.result.cache

@@ -1,0 +1,19 @@
+Serenity GO v1.2.2 — Patch from v1.2.1
+
+CHANGELOG.md
+PATCH_README.md
+README.md
+app/Http/Controllers/Owner/BatchController.php
+app/Http/Controllers/PublicController.php
+app/Models/Batch.php
+database/migrations/2026_10_18_000003_add_public_buyer_visibility_to_batches.php
+docs/source-files.txt
+public/assets/app.js
+public/assets/style.css
+resources/views/layouts/app.blade.php
+resources/views/owner/batches/form.blade.php
+resources/views/owner/batches/show.blade.php
+resources/views/public/tracking.blade.php
+scripts/check-project.ps1
+tests/Feature/DemoSeederTest.php
+tests/Feature/PublicBatchRecapTest.php
