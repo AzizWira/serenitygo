@@ -19,5 +19,5 @@ if ($missing.Count -eq 0) {
 }
 Write-Host "TIDAK LENGKAP: $($missing.Count) file hilang:" -ForegroundColor Red
 $missing | ForEach-Object { Write-Host "  - $_" }
-Write-Host 'Pulihkan file yang hilang dari ZIP source lengkap v1.2.2. Jangan timpa .env, storage, atau vendor.' -ForegroundColor Yellow
+Write-Host 'Pulihkan file yang hilang dari ZIP source lengkap v1.2.4. Jangan timpa .env, storage, atau vendor.' -ForegroundColor Yellow
 exit 1

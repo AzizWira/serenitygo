@@ -1,25 +1,24 @@
-# CHANGELOG — Serenity GO
+# Changelog — Serenity GO
 
-## v1.2.2 — 18 Oktober 2026 — Customer Batch Detail / Spreadsheet-Style Recap
+## v1.2.4 — Fix pagination Rekap Order & Tax
 
-### Added
-- Halaman `/track?q=JP%201` kini menampilkan header batch, status, timestamp, progress tahapan, timeline dan riwayat status yang aman untuk publik.
-- Rekap barang publik bergaya spreadsheet: customer (atau alias), nama barang, qty, statistik total customer/baris barang/unit, pencarian langsung, dropdown filter customer, dan pengurutan.
-- Tabel adaptif: desktop tabel penuh; mobile kartu informasi agar kolom mudah dibaca tanpa horizontal scroll.
-- Konfigurasi `show_customer_names_public` per batch (default **false**). Owner dapat mengaktifkan nama buyer saat memang diizinkan publik.
-- Pengaturan visibilitas data publik dapat diakses saat **buat batch** maupun **edit batch**, serta shortcut di detail Owner.
-- Tes regresi `PublicBatchRecapTest` untuk data publik, filter markup, keamanan alias, kontrol Owner dan privasi tax/internal note.
+- Mengganti paginator bawaan Laravel yang memakai class Tailwind (tidak tersedia pada stylesheet Serenity GO) dengan view pagination mandiri, tanpa dependensi CSS framework.
+- Memperbaiki ikon panah Sebelumnya/Berikutnya yang sebelumnya tampil sangat besar dan membuat halaman panjang.
+- Desain desktop: nomor halaman, ellipsis, halaman sebelumnya/berikutnya; desain mobile: navigasi ringkas dengan informasi nomor halaman.
+- Filter pencarian dan pilihan asal/status tetap terbawa ketika berpindah halaman.
+- Pagination di halaman Rekap Orders dan Tax & Tagihan menggunakan komponen yang sama.
+- Menambahkan pengujian render pagination dan verifikasi CSS desktop/mobile. Tidak mengubah database, import, maupun data order.
 
-### Updated
-- Aset CSS/JS `?v=1.2.2` agar cache browser/ngrok tidak menampilkan halaman lama.
-- Test DemoSeeder kini mengacu pada tampilan rekap terbaru.
-- Tidak ada perubahan login Owner `/secretkya`, fee Personal/Sharing, pembulatan Owner-only, maupun aturan tracking batch.
+## v1.2.3 — Import asli + Mobile File Picker
 
-### Security / Data
-- Existing batch **tidak otomatis mempublikasikan nama customer** saat migrasi.
-- Owner harus aktifkan dua opsi pada pengaturan batch agar nama + barang ditampilkan. Jika hanya barang diaktifkan, customer diberi alias Pembeli 01/02 tanpa memperlihatkan nama aslinya.
-- Data tax, internal note, kontak, dan payment tidak ditampilkan dalam tracking publik.
-- Hanya data item dan buyer yang perlu disajikan yang diambil dari database ketika publikasi barang aktif.
+- Mengganti import tabel generik lama dengan **dua profil spesifik** berdasarkan contoh workbook `Rekap Order Serenity.xlsx` dan `Tagihan Tax Serenity.xlsx`.
+- Membaca beberapa worksheet, format JP/KR/ID, header baris 3/4, dan kelanjutan batch/customer tanpa penulisan berulang.
+- Pemisahan tax per item dari total per customer; membaca Rupiah yang memakai titik/koma pemisah ribuan; menangani `UNDEFINED` tanpa mengarang angka.
+- Preview per worksheet, audit, daftar konflik, dan penyimpanan 100 tindakan per transaksi dengan opsi melanjutkan otomatis.
+- Menghindari data ganda dan melindungi qty/tax yang telah diubah manual; status tracking tidak mundur.
+- UI import responsif dengan native file input yang dapat disentuh dari HP, status file terpilih, dan panduan browser eksternal.
+- Menambahkan dua tabel provenance sync dan tes regresi. **Tidak** mengubah data lama saat migration dijalankan.
+- Fitur draft (kode customer, foto order, tax quantity counter) belum diaktifkan.
 
-### Pending (tidak termasuk rilis)
-- Kode customer manual/autogenerate, tracking lintas batch, galeri foto, tax counter.
+## v1.2.2
+Lihat riwayat perubahan versi sebelumnya pada Git/README.

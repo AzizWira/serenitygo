@@ -30,3 +30,32 @@
 @media(max-width:980px){.batch-public-layout{grid-template-columns:1fr}.batch-journey-panel{max-width:none}.batch-step-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px}.batch-step{min-height:55px}.batch-step:before{display:none}}
 @media(max-width:700px){.batch-public-summary{padding:22px;flex-direction:column;gap:17px;border-radius:20px}.batch-progress-visual{width:100%}.batch-stat-grid{gap:8px}.batch-stat{padding:14px}.batch-stat strong{font-size:24px}.batch-stat span,.batch-stat small{font-size:10px}.batch-rekap-panel,.batch-journey-panel{padding:20px 16px}.batch-filter-bar{grid-template-columns:1fr 1fr;gap:10px}.batch-keyword{grid-column:1/-1}.batch-table-info span:last-child{display:none}.batch-recap-table thead{display:none}.batch-table-wrap{border:0;overflow:visible}.batch-recap-table,.batch-recap-table tbody,.batch-recap-table tr,.batch-recap-table td{display:block;width:100%}.batch-recap-table tbody{display:grid;gap:10px}.batch-recap-table tr{position:relative;background:#f9fcff!important;border:1px solid #e6edf6;border-radius:14px;padding:12px 14px}.batch-recap-table td{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border:0;text-align:right!important;word-break:break-word}.batch-recap-table td:before{content:attr(data-label);font-size:10px;font-weight:750;color:#8ba1b5;text-align:left;white-space:nowrap}.batch-recap-table td:last-child{align-items:center}.batch-recap-table .batch-item-name{max-width:73%;text-align:right}.owner-public-sharing-tip{flex-direction:column;align-items:stretch}.owner-public-sharing-tip .button{width:100%}}
 @media(max-width:430px){.batch-stat-grid{grid-template-columns:1fr 1fr}.batch-stat:nth-child(3){grid-column:1/-1}.batch-filter-bar{grid-template-columns:1fr}.batch-keyword{grid-column:auto}.batch-summary-actions{align-items:stretch}.batch-summary-actions .button{flex:1}}
+/* v1.2.3 – touch-friendly native file picker and import preview */
+.mobile-file-input{display:block;min-height:58px;width:100%;padding:10px 12px;cursor:pointer;touch-action:manipulation;appearance:auto;-webkit-appearance:auto;opacity:1;position:relative;z-index:1}
+.mobile-file-input::file-selector-button{background:#d9eafe;border:1px solid #b6d5f4;color:#355c85;border-radius:12px;padding:9px 14px;font-weight:700;cursor:pointer;margin-right:12px;min-height:40px}
+.mobile-file-input::-webkit-file-upload-button{background:#d9eafe;border:1px solid #b6d5f4;color:#355c85;border-radius:12px;padding:9px 14px;font-weight:700;margin-right:12px;min-height:40px}
+.import-selected-file{color:#52799d;font-weight:650;font-size:12px;margin:9px 0}.import-sheet-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.import-sheet-choice{display:flex;align-items:center;gap:10px;border:1px solid #e0eaf4;border-radius:13px;padding:13px;background:#f9fcff;cursor:pointer;min-width:0}.import-sheet-choice input{accent-color:#5a89b8;flex-shrink:0;width:18px;height:18px}.import-sheet-choice span{min-width:0}.import-sheet-choice strong{display:block;color:#3c5f82;font-size:13px}.import-sheet-choice small{display:block;color:#8a9fb3;overflow-wrap:anywhere;font-size:11px}.import-summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 20px}.import-stat{background:#f5f9ff;border:1px solid #e2ecf7;border-radius:14px;padding:15px}.import-stat span{font-size:11px;color:#7990a6;display:block}.import-stat strong{display:block;font-size:23px;color:#365f89}.import-issues{padding:15px 18px;background:#fff7f8;border:1px solid #f1dce6;border-radius:14px;margin:15px 0}.import-issues summary{cursor:pointer;font-weight:700;color:#8e5578}.import-issues ul{max-height:260px;overflow:auto;font-size:12px;color:#72536b;margin-bottom:0}.import-issues li{margin:5px 0}.import-progress-wrap{display:grid;gap:9px;margin:22px 0}.import-progress-wrap progress{accent-color:#7eabd4;height:13px}
+@media(max-width:700px){.import-sheet-list{grid-template-columns:1fr}.import-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.mobile-file-input{font-size:14px;min-height:66px}.import-panel .button-primary{width:100%;white-space:normal}}
+
+/* Serenity GO pagination (v1.2.4): replace the default Tailwind-dependent pagination.
+   Scoped styles prevent unbounded SVG and oversized navigation from returning. */
+.pagination-box{min-width:0;margin-top:22px}
+.serenity-pagination{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;max-width:100%}
+.serenity-pagination-summary{margin:0;color:#728da7;font-size:12px;line-height:1.5}
+.serenity-pagination-summary strong{color:#456b90;font-weight:750}
+.serenity-pagination-pages{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:6px;max-width:100%}
+.serenity-page{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:36px;height:36px;padding:0 10px;border:1px solid #e1eaf5;border-radius:11px;background:#fff;color:#57799b;font-size:12px;font-weight:700;line-height:1;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background .16s ease,border-color .16s ease,color .16s ease}
+a.serenity-page:hover{background:#edf6ff;border-color:#bcd9f3;color:#345e87}
+.serenity-page.is-active{background:#5c86b0;border-color:#5c86b0;color:#fff;box-shadow:0 4px 12px rgba(97,143,183,.16)}
+.serenity-page.is-disabled{background:#f7f9fc;color:#aebdcd;cursor:default}
+.serenity-page-direction{padding:0 12px}
+.serenity-page-direction [aria-hidden="true"]{font-size:21px;line-height:1}
+.serenity-pagination-mobile{display:none}
+.serenity-page-status{font-size:12px;font-weight:750;color:#5c7c99;white-space:nowrap}
+.serenity-page-dots{display:inline-flex;align-items:center;justify-content:center;height:36px;min-width:22px;color:#91a5b9;font-size:15px}
+@media(max-width:650px){
+  .serenity-pagination{flex-direction:column;align-items:stretch;gap:10px}
+  .serenity-pagination-pages{display:none}
+  .serenity-pagination-mobile{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:1px solid #e8eef6;background:#f9fcff;border-radius:14px;padding:9px}
+  .serenity-pagination-mobile .serenity-page{height:40px;width:40px;min-width:40px;font-size:22px;padding:0}
+}

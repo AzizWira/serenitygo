@@ -22,6 +22,8 @@ app/Models/User.php
 app/Providers/AppServiceProvider.php
 app/Support/GoStatus.php
 app/Support/PriceCalculator.php
+app/Support/SerenityImportService.php
+app/Support/SerenitySpreadsheetParser.php
 artisan
 bootstrap/app.php
 bootstrap/cache/.gitignore
@@ -32,11 +34,13 @@ config/trustedproxy.php
 database/migrations/2026_10_18_000001_create_serenity_tables.php
 database/migrations/2026_10_18_000002_add_order_fees_rounding_and_fix_statuses.php
 database/migrations/2026_10_18_000003_add_public_buyer_visibility_to_batches.php
+database/migrations/2026_10_19_000001_add_safe_import_sync_tables.php
 database/seeders/DatabaseSeeder.php
 database/seeders/DemoSeeder.php
 docs/DEMO_SEED_DATA.md
 docs/DRAFT_NEXT_FEATURES.md
 docs/NGROK_TROUBLESHOOTING.md
+docs/SERENITY_IMPORT_GUIDE.md
 docs/source-files.txt
 phpunit.xml
 public/.htaccess
@@ -54,6 +58,7 @@ resources/views/owner/dashboard.blade.php
 resources/views/owner/imports/index.blade.php
 resources/views/owner/settings/index.blade.php
 resources/views/owner/taxes/index.blade.php
+resources/views/pagination/serenity.blade.php
 resources/views/public/home.blade.php
 resources/views/public/tracking.blade.php
 routes/console.php
@@ -70,4 +75,6 @@ tests/Feature/NgrokProxyTest.php
 tests/Feature/PublicBatchRecapTest.php
 tests/Feature/README.md
 tests/Feature/Release120Test.php
+tests/Feature/SerenityImportTest.php
+tests/Feature/SerenityPaginationTest.php
 tests/TestCase.php

@@ -37,4 +37,6 @@ Route::middleware('auth')->prefix('owner')->name('owner.')->group(function () {
     Route::get('/imports', [ImportController::class, 'index'])->name('imports.index');
     Route::post('/imports/preview', [ImportController::class, 'preview'])->name('imports.preview');
     Route::post('/imports/commit', [ImportController::class, 'commit'])->name('imports.commit');
+    Route::post('/imports/sheets', [ImportController::class, 'sheets'])->name('imports.sheets');
+    Route::post('/imports/discard', [ImportController::class, 'discard'])->name('imports.discard');
 });

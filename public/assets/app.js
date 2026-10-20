@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   backdrop?.addEventListener('click', closeSidebar);
   document.addEventListener('keydown', e => {if(e.key==='Escape') closeSidebar();});
   document.querySelectorAll('form[data-confirm]').forEach(form => form.addEventListener('submit', e => {
+    if (form.dataset.autoContinue === '1') return;
     if (!window.confirm(form.dataset.confirm || 'Yakin ingin melanjutkan?')) e.preventDefault();
   }));
   document.querySelectorAll('button[data-confirm]').forEach(button => button.addEventListener('click', e => {
@@ -51,6 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch(error) {showError('Perhitungan gagal tersambung. Coba kembali.');}
     finally {button.disabled=false;button.textContent='Calculate My Price ♡';}
   });
+  }
+
+  const upload = document.getElementById('serenityExcel');
+  if (upload) {
+    const output = document.getElementById('selectedExcelFile');
+    upload.addEventListener('change', () => {
+      const file = upload.files?.[0];
+      output.textContent = file ? `${file.name} · ${(file.size / 1024).toFixed(0)} KB` : 'Belum ada file dipilih.';
+    });
+  }
+
+  const importContinue = document.getElementById('serenityImportCommit');
+  if (importContinue?.dataset.autoContinue === '1') {
+    const agree = importContinue.querySelector('[name="confirmed"]');
+    const auto = importContinue.querySelector('[name="auto_continue"]');
+    if (agree && auto) {agree.checked = true;auto.checked = true;}
+    // Do not trigger the interactive data-confirm prompt for every committed chunk.
+    importContinue.removeAttribute('data-confirm');
+    window.setTimeout(() => importContinue.requestSubmit(), 500);
   }
 
   // Batch recap is progressively enhanced: without JS the full table remains visible.

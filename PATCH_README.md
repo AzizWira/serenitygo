@@ -1,43 +1,55 @@
-# Patch Serenity GO v1.2.2 (dari v1.2.1)
+# Patch Serenity GO v1.2.4 — Pagination Responsif
 
-**Fokus:** memperbaiki halaman **tracking detail batch CUSTOMER** supaya memiliki tabel per customer, nama barang dan qty seperti spreadsheet, dengan pencarian/filter dan tampilan responsif. Bukan perubahan halaman batch Owner (kecuali pengaturan visibilitas publik).
+**Basis:** Serenity GO v1.2.3. Patch ini hanya menangani masalah panah pagination sangat besar pada daftar Rekap Orders (dan potensi masalah serupa di Tax & Tagihan).
 
-## Panduan update aman (Windows PowerShell)
+## Perubahan
+- `resources/views/pagination/serenity.blade.php` (baru): paginator native tanpa Tailwind/Bootstrap.
+- `resources/views/owner/batches/index.blade.php` dan `resources/views/owner/taxes/index.blade.php`: panggil paginator baru.
+- `public/assets/style.css`: style pagination desktop/mobile dengan ukuran kontrol terbatas.
+- `resources/views/layouts/app.blade.php`: cache-bust CSS versi 1.2.4.
+- `tests/Feature/SerenityPaginationTest.php`: tes navigasi dan query string.
+- `docs/source-files.txt` / `scripts/check-project.ps1` / dokumentasi: manifest dan catatan versi.
 
-1. Pastikan source yang saat ini terpasang adalah **v1.2.1**. Backup folder proyek dan ekspor database MySQL terlebih dahulu.
-2. Extract `serenity-go-v1.2.2-patch.zip`; salin **isi folder** `serenity-go-v1.2.2-patch` ke root `D:\gawean\serenity-go`, pilih **Replace**.
-3. Pertahankan file `.env`, folder `vendor/`, `storage/`, dan database. Jangan jalankan migrate:fresh atau seed ulang.
-4. Jalankan:
+## Instalasi lokal (Windows)
+1. Backup folder proyek dulu. Ekstrak **isi** ZIP patch ke `D:\gawean\serenity-go`, dan pilih Replace. **Jangan** hapus `.env`, `vendor`, atau `storage`.
+2. PowerShell:
 
 ```powershell
 cd D:\gawean\serenity-go
-php artisan migrate
+php artisan view:clear
 php artisan optimize:clear
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\scripts\check-project.ps1"
-php artisan serve --port=8001
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\check-project.ps1
+# Opsional, perlu vendor dan database testing siap:
+php artisan test --filter=SerenityPaginationTest
 ```
 
-Untuk ngrok, pada terminal terpisah jalankan `ngrok http 8001`, lalu buka URL HTTPS. Jika CSS/JS lama masih terlihat, gunakan Ctrl+Shift+R.
+3. Buka `/owner/batches` lalu refresh paksa (`Ctrl+Shift+R`), uji pindah halaman, filter JP/KR/ID, dan tampilan HP.
 
-## AGAR NAMA CUSTOMER DAN BARANG TERLIHAT
+## Push ke GitHub & pull di Hostinger
 
-Migrasi **tidak otomatis membuka nama customer** pada batch lama untuk mencegah kebocoran data pribadi.
+Pada komputer lokal, setelah melihat perubahan `git status` dan memastikan `.env` tidak ikut staging:
 
-1. Login Owner di `/secretkya`.
-2. Masuk **Rekap Orders → pilih batch → Settings** (atau tombol **Atur Tampilan** di detail batch).
-3. Aktifkan **Tampilkan tabel barang & qty**.
-4. Aktifkan **Tampilkan nama pembeli** jika nama/panggilan tersebut memang disetujui untuk publik. Jika tidak, yang tampil hanya alias Pembeli 01/02.
-5. Simpan, lalu buka **Preview Tracking** atau `/track?q=JP%201` (sesuaikan kode).
+```powershell
+cd D:\gawean\serenity-go
+git add CHANGELOG.md README.md PATCH_README.md docs/source-files.txt scripts/check-project.ps1 public/assets/style.css resources/views/layouts/app.blade.php resources/views/owner/batches/index.blade.php resources/views/owner/taxes/index.blade.php resources/views/pagination/serenity.blade.php tests/Feature/SerenityPaginationTest.php
+git commit -m "Fix pagination layout Serenity GO v1.2.4"
+git push origin main
+```
 
-**Semua orang yang memiliki nomor batch dapat membaca daftar yang dipublikasikan.** Gunakan nama panggilan/alias, hindari informasi pribadi. Tax, payment, catatan internal tidak tampil.
+SSH Hostinger:
 
-## Pengujian manual
+```bash
+cd ~/domains/serenitygo.my.id/app
+git pull --ff-only origin main
+php artisan view:clear
+php artisan optimize:clear
+```
 
-- Coba batch publik banyak customer: nama, barang, qty tampil; cari nama, filter customer, sort qty.
-- Coba dari HP: baris ditampilkan menjadi kartu sehingga tidak perlu geser horizontal.
-- Coba batch `show_items_public` tidak aktif: status tetap terlihat, rekap tidak bocor.
-- Coba nonaktifkan publikasi nama: barang tetap terlihat, nama diganti alias.
-- Periksa halaman di incognito + ngrok, dan cek status batch JP/KR/ID.
-- Bila Composer & SQLite tersedia, jalankan `php artisan test --filter=PublicBatchRecapTest` dan `php artisan test`.
+Buka `https://serenitygo.my.id/secretkya` kemudian Rekap Orders dan Tax & Tagihan. Refresh paksa agar stylesheet baru dipakai.
 
-**Catatan:** Tes Laravel end-to-end belum dapat dijalankan di lingkungan penyusunan ZIP ini; jangan gunakan data customer sungguhan di ngrok publik sebelum kebijakan publikasi nama disetujui.
+**Tidak perlu:** `composer install`, `php artisan migrate`, `migrate:fresh`, `db:seed`, atau perubahan database.
+
+## Verifikasi
+- PHP syntax lint dan pemeriksaan isi ZIP.
+- Layout CSS diuji lewat browser Chromium pada desktop dan mobile menggunakan mock HTML; tidak ada panah raksasa dan horizontal overflow.
+- Feature test Laravel disertakan, **belum dieksekusi end-to-end** karena dependensi Composer tidak tersedia pada environment pengemasan.

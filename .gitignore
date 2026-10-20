@@ -12,3 +12,6 @@
 /bootstrap/cache/*.php
 /public/hot
 /.phpunit.result.cache
+
+# Uploaded spreadsheets and temporary import previews are sensitive
+/storage/app/private/serenity-imports/

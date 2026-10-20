@@ -1,4 +1,8 @@
-# Serenity GO v1.2.2
+> **v1.2.4 (UI hotfix):** Pagination Rekap Orders dan Tax & Tagihan kini menggunakan CSS Serenity GO sendiri; panah raksasa diperbaiki. Install patch, `php artisan view:clear`, `php artisan optimize:clear`, lalu hard refresh. **Tidak perlu migrate atau seed ulang.** Lihat `PATCH_README.md`.
+
+> **Update v1.2.3:** Import Excel kini mengikuti dua workbook asli Serenity GO, dengan preview, pemeriksaan konflik, perlindungan data manual, dan pemilih berkas mobile. Lihat [`docs/SERENITY_IMPORT_GUIDE.md`](docs/SERENITY_IMPORT_GUIDE.md) sebelum mengimpor ke production.
+
+# Serenity GO v1.2.4
 
 Website operasional Group Order yang berfokus pada **tracking publik**, **kalkulator harga/kurs**, dan **dashboard satu Owner**. Desain **Cute Pastel UI** menggunakan baby blue, soft pink, white, font Inter. Responsive mobile/tablet/desktop.
 
