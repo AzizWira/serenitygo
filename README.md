@@ -1,3 +1,5 @@
+AWI
+
 > **v1.2.4 (UI hotfix):** Pagination Rekap Orders dan Tax & Tagihan kini menggunakan CSS Serenity GO sendiri; panah raksasa diperbaiki. Install patch, `php artisan view:clear`, `php artisan optimize:clear`, lalu hard refresh. **Tidak perlu migrate atau seed ulang.** Lihat `PATCH_README.md`.
 
 > **Update v1.2.3:** Import Excel kini mengikuti dua workbook asli Serenity GO, dengan preview, pemeriksaan konflik, perlindungan data manual, dan pemilih berkas mobile. Lihat [`docs/SERENITY_IMPORT_GUIDE.md`](docs/SERENITY_IMPORT_GUIDE.md) sebelum mengimpor ke production.
